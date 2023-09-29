@@ -11,7 +11,7 @@ type Item = {
 const getCartItems: Item[] = [
   {name: 'LCD Xiaomi Redmi 9a with touch screen black', isChecked: false, cell: ''},
   {name: 'LCD Xiaomi Redmi 7a with touch screen black', isChecked: false, cell: ''},
-  {name: 'LCD Samsung A720 with touch screen black', isChecked: false, cell: ''},
+  {name: 'LCD Samsung A720 with touch screen black', isChecked: false, cell: '02-A-23'},
   {name: 'Charge connector ун.2', isChecked: false, cell: ''},
   {name: 'Battery Maxbat BM47', isChecked: false, cell: ''},
   {name: 'Захисне скло Prime Xiaomi redmi 4x', isChecked: false, cell: ''},
