@@ -1,8 +1,13 @@
+import Grid from '@mui/material/Grid'
 
 
 const MainBar = () => {
   return (
-    <div>MainBar</div>
+    <>
+        <Grid container spacing={0} direction={'row'}>
+                   
+        </Grid>
+    </>
   )
 }
 
