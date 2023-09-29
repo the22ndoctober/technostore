@@ -17,7 +17,18 @@ const getCartItems: Item[] = [
   {name: 'Захисне скло Prime Xiaomi redmi 4x', isChecked: false, cell: ''},
   {name: 'Деталь номер 4', isChecked: false, cell: ''},
   {name: 'Деталь номер 124', isChecked: false, cell: ''},
-  {name: 'Деталь номер 4545', isChecked: false, cell: ''},
+  {name: 'Деталь номер 5', isChecked: false, cell: ''},
+  {name: 'Деталь номер 6', isChecked: false, cell: ''},
+  {name: 'Деталь номер 7', isChecked: false, cell: ''},
+  {name: 'Деталь номер 8', isChecked: false, cell: ''},
+  {name: 'Деталь номер 9', isChecked: false, cell: ''},
+  {name: 'Деталь номер 132', isChecked: false, cell: ''},
+  {name: 'Деталь ;3211', isChecked: false, cell: ''},
+  {name: 'Деталь печаль', isChecked: false, cell: ''},
+  {name: 'Деталь номер 124321421142412', isChecked: false, cell: ''},
+  {name: 'Деталь номер 4 20', isChecked: false, cell: ''},
+  {name: 'Захисна плівка номер 4545', isChecked: false, cell: ''},
+  {name: 'Сенс життя', isChecked: false, cell: ''},
   
 ]
 

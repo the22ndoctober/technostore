@@ -12,7 +12,7 @@ const Content = () => {
     const dispatch = useDispatch()
 
   return (
-    <Box sx={{p:3, width:1000, display:'flex',justifyContent:'center'}}>
+    <Box sx={{p:3, height: 700,width:1000, display:'flex',justifyContent:'center', overflowY:'scroll'}}>
         <Box sx={{rowGap:1, display:'flex', flexDirection:'column'}}>
 
         <Grid container spacing={0} direction={'row'} columnGap={2} px={1}>
