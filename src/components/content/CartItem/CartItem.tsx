@@ -1,32 +1,40 @@
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-
-
-
-
-
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
 
 type ItemProps = {
-    id:number
+    id: number
     name: string
     isChecked: boolean
     cell: string
     handleChecked: any
-  }
+}
 
-const CartItem = (
-    {id,name,isChecked,cell, handleChecked}:ItemProps
-) => {
-  return (
-    <Grid container spacing={0} direction={'row'} columnGap={2} sx={{bgcolor:isChecked?'blue':'',color:isChecked?'white':'black',p:1, width:550, border: '1px solid green'}} onClick={()=>{
-        handleChecked()
-    }}>
-        <Typography variant="body1" >{id+1+'.'}</Typography>
-        <Typography variant="body1" >{name}</Typography>
-        <Typography variant="body1" sx={{ ml: 'auto'}}>{cell}</Typography>
-        
-    </Grid>
-  )
+const CartItem = ({ id, name, isChecked, cell, handleChecked }: ItemProps) => {
+    return (
+        <Grid
+            container
+            spacing={0}
+            direction={"row"}
+            columnGap={2}
+            sx={{
+                cursor: "pointer",
+                bgcolor: isChecked ? "blue" : "",
+                color: isChecked ? "white" : "black",
+                p: 1,
+                width: 550,
+                border: "1px solid green",
+            }}
+            onClick={() => {
+                handleChecked()
+            }}
+        >
+            <Typography variant="body1">{id + 1 + "."}</Typography>
+            <Typography variant="body1">{name}</Typography>
+            <Typography variant="body1" sx={{ ml: "auto" }}>
+                {cell}
+            </Typography>
+        </Grid>
+    )
 }
 
 export default CartItem

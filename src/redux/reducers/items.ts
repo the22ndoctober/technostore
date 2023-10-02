@@ -26,9 +26,9 @@ const getCartItems: Item[] = [
     { name: "Charge connector ун.2", isChecked: false, cell: "" },
     { name: "Battery Maxbat BM47", isChecked: false, cell: "" },
     { name: "Захисне скло Prime Xiaomi redmi 4x", isChecked: false, cell: "" },
-    { name: "Деталь номер 4", isChecked: false, cell: "" },
-    { name: "Деталь номер 124", isChecked: false, cell: "" },
-    { name: "Деталь номер 5", isChecked: false, cell: "" },
+    { name: "Деталь номер 4", isChecked: false, cell: "11-A-23" },
+    { name: "Деталь номер 124", isChecked: false, cell: "14-A-25" },
+    { name: "Деталь номер 5", isChecked: false, cell: "15-Т-33" },
     { name: "Деталь номер 6", isChecked: false, cell: "" },
     { name: "Деталь номер 7", isChecked: false, cell: "" },
     { name: "Деталь номер 8", isChecked: false, cell: "" },
@@ -54,10 +54,13 @@ const cardsSlice = createSlice({
         selectItem: (state, action) => {
             state.items = actions.selectItem(state.items, action.payload)
         },
+        clearSelected: (state, action) => {
+            state.items = actions.clearSelected(state.items, action.payload)
+        },
     },
 })
 
-export const { addItem, selectItem } = cardsSlice.actions
+export const { addItem, selectItem, clearSelected } = cardsSlice.actions
 export const selectState = (state: any) => state.cards.items
 
 export default cardsSlice.reducer
