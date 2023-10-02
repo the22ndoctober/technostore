@@ -245,6 +245,12 @@ const cellsSlice = createSlice({
         unselectCols: (state, action) => {
             state.cells = actions.unselectCols(state.cells, action.payload)
         },
+        addSelectedCells: (state, action) => {
+            state.selectedCells = actions.addSelectedCells(
+                state.selectedCells,
+                action.payload
+            )
+        },
         clearSelectedCells: (state, action) => {
             state.selectedCells = actions.clearSelectedCells(
                 state.selectedCells,
@@ -254,7 +260,7 @@ const cellsSlice = createSlice({
     },
 })
 
-export const { clearSelectedCells, selectCol, unselectCols } =
+export const { clearSelectedCells, selectCol, unselectCols, addSelectedCells } =
     cellsSlice.actions
 export const selectCells = (state: any) => state.cells.cells
 export const selectFilledCells = (state: any) => state.cells.filledCells

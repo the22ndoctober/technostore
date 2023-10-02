@@ -1,4 +1,9 @@
-import { CLEAR_SELECTED_CELLS, SELECT_COL, UNSELECT_COLS } from "../types"
+import {
+    ADD_SELECTED_CELLS,
+    CLEAR_SELECTED_CELLS,
+    SELECT_COL,
+    UNSELECT_COLS,
+} from "../types"
 
 export const handleCell = (state: any, action: any) => {
     return state
@@ -50,5 +55,26 @@ export const unselectCols = (state: any, action: any) => {
                 })),
             })),
         }))
+    return state
+}
+
+export const addSelectedCells = (state: any, action: any) => {
+    if (action.type === ADD_SELECTED_CELLS) {
+        let finalArray: any[] = []
+        action.payload.forEach((rack: any) => {
+            rack.rows.forEach((row: any) => {
+                row.columns.forEach((col: any) => {
+                    if (col.isSelected) {
+                        finalArray.push({
+                            rack: rack.rack,
+                            row: row.row,
+                            col: col.column,
+                        })
+                    }
+                })
+            })
+        })
+        return finalArray
+    }
     return state
 }

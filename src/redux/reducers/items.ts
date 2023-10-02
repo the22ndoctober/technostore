@@ -51,8 +51,14 @@ const cardsSlice = createSlice({
         addItem: (state) => {
             state.items = actions.addItem(state.items)
         },
+        setCells: (state, action) => {
+            state.items = actions.setCells(state.items, action.payload)
+        },
         selectItem: (state, action) => {
             state.items = actions.selectItem(state.items, action.payload)
+        },
+        selectAllItems: (state, action) => {
+            state.items = actions.selectAllItems(state.items, action.payload)
         },
         clearSelected: (state, action) => {
             state.items = actions.clearSelected(state.items, action.payload)
@@ -60,7 +66,8 @@ const cardsSlice = createSlice({
     },
 })
 
-export const { addItem, selectItem, clearSelected } = cardsSlice.actions
+export const { addItem, selectItem, clearSelected, setCells, selectAllItems } =
+    cardsSlice.actions
 export const selectState = (state: any) => state.cards.items
 
 export default cardsSlice.reducer

@@ -1,4 +1,4 @@
-import { Box, Modal } from "@mui/material"
+import { Box, Button, Modal } from "@mui/material"
 import Typography from "@mui/material/Typography"
 import { useDispatch } from "react-redux"
 import { SELECT_COL } from "../../../redux/types"
@@ -9,6 +9,7 @@ export type CellsSelectProps = {
     open: boolean
     handleClose: any
     cells: any
+    confirm: any
 }
 
 const style = {
@@ -25,7 +26,13 @@ const style = {
     p: 4,
 }
 
-const CellsSelect = ({ open, handleClose, rack, cells }: CellsSelectProps) => {
+const CellsSelect = ({
+    open,
+    handleClose,
+    rack,
+    cells,
+    confirm,
+}: CellsSelectProps) => {
     const dispatch = useDispatch()
 
     const selectColumn = (row: string, col: string) => {
@@ -40,47 +47,76 @@ const CellsSelect = ({ open, handleClose, rack, cells }: CellsSelectProps) => {
     return (
         <Modal
             open={open}
-            onClose={handleClose}
+            onClose={() => {
+                confirm()
+                handleClose()
+            }}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    {rack}
-                </Typography>
-                {cells
-                    .find((cell: any) => cell.rack === rack)
-                    .rows.map((row: any) => (
-                        <>
-                            <Typography variant="h6" color="initial">
-                                {row.row}
-                            </Typography>
-                            {row.columns.map((column: any) => {
-                                return (
-                                    <Typography
-                                        id="modal-modal-description"
-                                        sx={{
-                                            cursor: "pointer",
-                                            p: 1,
-                                            mt: 2,
-                                            bgcolor: column.isSelected
-                                                ? "blue"
-                                                : "",
-                                            color: column.isSelected
-                                                ? "white"
-                                                : "black",
-                                        }}
-                                        onClick={() => {
-                                            selectColumn(row.row, column.column)
-                                        }}
-                                    >
-                                        Комірка: {rack}-{row.row}-
-                                        {column.column}
-                                    </Typography>
-                                )
-                            })}
-                        </>
-                    ))}
+            <Box sx={{ ...style, overflow: "hidden" }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                        confirm()
+                        handleClose()
+                    }}
+                    sx={{
+                        position: "fixed",
+                        bottom: 20,
+                        right: 50,
+                        zIndex: 20,
+                        fontSize: "24px",
+                    }}
+                >
+                    Зберігти виділені
+                </Button>
+                <Box sx={{ ...style, height: "100%" }}>
+                    <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                    >
+                        {rack}
+                    </Typography>
+                    {cells
+                        .find((cell: any) => cell.rack === rack)
+                        .rows.map((row: any) => (
+                            <>
+                                <Typography variant="h6" color="initial">
+                                    {row.row}
+                                </Typography>
+                                {row.columns.map((column: any) => {
+                                    return (
+                                        <Typography
+                                            id="modal-modal-description"
+                                            sx={{
+                                                cursor: "pointer",
+                                                p: 1,
+                                                mt: 2,
+                                                bgcolor: column.isSelected
+                                                    ? "blue"
+                                                    : "",
+                                                color: column.isSelected
+                                                    ? "white"
+                                                    : "black",
+                                            }}
+                                            onClick={() => {
+                                                selectColumn(
+                                                    row.row,
+                                                    column.column
+                                                )
+                                            }}
+                                        >
+                                            Комірка: {rack}-{row.row}-
+                                            {column.column}
+                                        </Typography>
+                                    )
+                                })}
+                            </>
+                        ))}
+                </Box>
             </Box>
         </Modal>
     )

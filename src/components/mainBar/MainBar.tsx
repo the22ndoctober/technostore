@@ -10,16 +10,20 @@ import {
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {
+    addSelectedCells,
     clearSelectedCells,
     selectCells,
     unselectCols,
 } from "../../redux/reducers/cells"
 import {
+    ADD_SELECTED_CELLS,
     CLEAR_SELECTED_CELLS,
     CLEAR_SELECTED_ITEMS,
+    SELECT_ALL_ITEMS,
+    UNSELECT_ALL_ITEMS,
     UNSELECT_COLS,
 } from "../../redux/types"
-import { clearSelected } from "../../redux/reducers/items"
+import { clearSelected, selectAllItems } from "../../redux/reducers/items"
 import CellsSelect from "./cellsSelect/CellsSelect"
 
 const MainBar = () => {
@@ -52,6 +56,10 @@ const MainBar = () => {
         setUseAll(event.target.checked)
     }
 
+    const confirmSelect = () => {
+        dispatch(addSelectedCells({ type: ADD_SELECTED_CELLS, payload: cells }))
+    }
+
     const clearSelectedItems = () => {
         dispatch(clearSelected({ type: CLEAR_SELECTED_ITEMS }))
     }
@@ -76,7 +84,7 @@ const MainBar = () => {
                 p={2}
                 direction={"row"}
                 justifyContent={"center"}
-                sx={{ width: 1200, m: "0 auto" }}
+                sx={{ width: 1440, m: "0 auto" }}
             >
                 <InputLabel
                     sx={{ display: "flex", alignItems: "center" }}
@@ -102,6 +110,11 @@ const MainBar = () => {
                             variant="contained"
                             color="primary"
                             onClick={handleOpen}
+                            sx={{
+                                fontSize: "10px",
+                                p: "6px 6px",
+                                minWidth: 48,
+                            }}
                         >
                             Вибрати ячейки
                         </Button>
@@ -110,6 +123,7 @@ const MainBar = () => {
                             handleClose={handleClose}
                             rack={value}
                             cells={cells}
+                            confirm={confirmSelect}
                         />
                     </>
                 ) : (
@@ -138,13 +152,53 @@ const MainBar = () => {
                     onChange={handleRewrite}
                     inputProps={{ "aria-label": "controlled" }}
                 />
-
-                <Button variant="contained" color="primary">
-                    Прив'язати
+                <Button
+                    variant="contained"
+                    color="success"
+                    sx={{
+                        fontSize: "10px",
+                        p: "6px 6px",
+                        minWidth: 48,
+                    }}
+                    onClick={() => {
+                        dispatch(selectAllItems({ type: SELECT_ALL_ITEMS }))
+                    }}
+                >
+                    Виділити всі
+                </Button>
+                <Button
+                    sx={{
+                        fontSize: "10px",
+                        p: "6px 6px",
+                        minWidth: 48,
+                    }}
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                        dispatch(selectAllItems({ type: UNSELECT_ALL_ITEMS }))
+                    }}
+                >
+                    Зняти помітку
                 </Button>
                 <Button
                     variant="contained"
                     color="primary"
+                    sx={{
+                        fontSize: "10px",
+                        p: "6px 6px",
+                        minWidth: 48,
+                    }}
+                >
+                    Прив'язати
+                </Button>
+                <Button
+                    sx={{
+                        fontSize: "10px",
+                        p: "6px 6px",
+                        minWidth: 48,
+                    }}
+                    variant="contained"
+                    color="secondary"
                     onClick={clearSelectedItems}
                 >
                     Очистити виділені
