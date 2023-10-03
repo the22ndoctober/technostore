@@ -1,18 +1,13 @@
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button"
-import {
-    Checkbox,
-    FormControlLabel,
-    InputLabel,
-    MenuItem,
-    Select,
-} from "@mui/material"
+import { Checkbox, InputLabel, MenuItem, Select } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {
     addSelectedCells,
     clearSelectedCells,
     selectCells,
+    selectSelectedCells,
     unselectCols,
 } from "../../redux/reducers/cells"
 import {
@@ -20,10 +15,15 @@ import {
     CLEAR_SELECTED_CELLS,
     CLEAR_SELECTED_ITEMS,
     SELECT_ALL_ITEMS,
+    SET_CELLS,
     UNSELECT_ALL_ITEMS,
     UNSELECT_COLS,
 } from "../../redux/types"
-import { clearSelected, selectAllItems } from "../../redux/reducers/items"
+import {
+    clearSelected,
+    selectAllItems,
+    setCells,
+} from "../../redux/reducers/items"
 import CellsSelect from "./cellsSelect/CellsSelect"
 
 const MainBar = () => {
@@ -33,6 +33,7 @@ const MainBar = () => {
     const [open, setOpen] = useState<boolean>(false)
 
     const cells = useSelector(selectCells)
+    const selectedCells = useSelector(selectSelectedCells)
 
     const dispatch = useDispatch()
 
@@ -62,6 +63,21 @@ const MainBar = () => {
 
     const clearSelectedItems = () => {
         dispatch(clearSelected({ type: CLEAR_SELECTED_ITEMS }))
+    }
+
+    const handleSetCells = () => {
+        dispatch(
+            setCells({
+                type: SET_CELLS,
+                payload: {
+                    isOverwrite: rewrite,
+                    isUseAll: useAll,
+                    cells: selectedCells,
+                    allCells: cells,
+                    selectedRack: value,
+                },
+            })
+        )
     }
 
     useEffect(() => {
@@ -188,6 +204,7 @@ const MainBar = () => {
                         p: "6px 6px",
                         minWidth: 48,
                     }}
+                    onClick={handleSetCells}
                 >
                     Прив'язати
                 </Button>

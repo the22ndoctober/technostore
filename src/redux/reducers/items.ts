@@ -48,9 +48,6 @@ const cardsSlice = createSlice({
         items: [...getCartItems],
     },
     reducers: {
-        addItem: (state) => {
-            state.items = actions.addItem(state.items)
-        },
         setCells: (state, action) => {
             state.items = actions.setCells(state.items, action.payload)
         },
@@ -66,7 +63,7 @@ const cardsSlice = createSlice({
     },
 })
 
-export const { addItem, selectItem, clearSelected, setCells, selectAllItems } =
+export const { selectItem, clearSelected, setCells, selectAllItems } =
     cardsSlice.actions
 export const selectState = (state: any) => state.cards.items
 

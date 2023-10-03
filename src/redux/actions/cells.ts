@@ -5,7 +5,7 @@ import {
     UNSELECT_COLS,
 } from "../types"
 
-export const handleCell = (state: any, action: any) => {
+export const handleCell = (state: any) => {
     return state
 }
 

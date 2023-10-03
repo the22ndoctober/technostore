@@ -17,10 +17,92 @@ type SetCellsProps = {
         isOverwrite: boolean
         isUseAll: boolean
         cells: Cells[]
+        allCells?: any[]
+        selectedRack: string
     }
 }
 
-export const addItem = (state: any) => {
+export const setCells = (state: any, action: SetCellsProps) => {
+    if (action.type === SET_CELLS) {
+        if (action.payload.isUseAll && action.payload.allCells) {
+            let freeCells: any[] = []
+            action.payload.allCells
+                .find((rack) => rack.rack === action.payload.selectedRack)
+                .rows.forEach((row: any) => {
+                    row.columns.forEach((col: any) => {
+                        freeCells.push(
+                            `${action.payload.selectedRack}-${row.row}-${col.column}`
+                        )
+                    })
+                })
+
+            if (action.payload.isOverwrite) {
+                let i = 0
+                return state.map((item: any) => {
+                    if (item.isChecked && i < freeCells.length) {
+                        let newItem = {
+                            ...item,
+                            cell: freeCells[i],
+                        }
+                        i = i + 1
+
+                        return newItem
+                    }
+                    return item
+                })
+            }
+
+            let i = 0
+            return state.map((item: any) => {
+                if (
+                    item.isChecked &&
+                    i < freeCells.length &&
+                    item.cell === ""
+                ) {
+                    let newItem = {
+                        ...item,
+                        cell: freeCells[i],
+                    }
+                    i = i + 1
+
+                    return newItem
+                }
+                return item
+            })
+        }
+        if (action.payload.isOverwrite) {
+            let i: number = 0
+            return state.map((item: any) => {
+                if (item.isChecked && i < action.payload.cells.length) {
+                    let newItem = {
+                        ...item,
+                        cell: `${action.payload.cells[i].rack}-${action.payload.cells[i].row}-${action.payload.cells[i].col}`,
+                    }
+                    i = i + 1
+
+                    return newItem
+                }
+                return item
+            })
+        }
+        let i: number = 0
+        return state.map((item: any) => {
+            if (
+                item.cell === "" &&
+                item.isChecked &&
+                i < action.payload.cells.length
+            ) {
+                let newItem = {
+                    ...item,
+                    cell: `${action.payload.cells[i].rack}-${action.payload.cells[i].row}-${action.payload.cells[i].col}`,
+                }
+                i = i + 1
+
+                return newItem
+            }
+            return item
+        })
+    }
     return state
 }
 
@@ -35,18 +117,6 @@ export const clearSelected = (state: any, action: any) => {
         return state.map((item: any) =>
             item.isChecked && item.cell !== "" ? { ...item, cell: "" } : item
         )
-    }
-    return state
-}
-
-export const setCells = (state: any, action: SetCellsProps) => {
-    if (action.type === SET_CELLS) {
-        if (action.payload.isUseAll) {
-            if (action.payload.isOverwrite) {
-            }
-            return state
-        }
-        return state.map()
     }
     return state
 }
