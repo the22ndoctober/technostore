@@ -7,7 +7,7 @@ type ItemProps = {
     values: ItemProps[]
 }
 
-const Item: React.FC<ItemProps> = ({ id, name, type, values }) => {
+const Item: React.FC<ItemProps> = ({ id, name, values }) => {
     const rowGap = useMemo(() => {
         return values.length > 1 ? "50px" : "25px"
     }, [values])

@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react"
+import { useState, useMemo } from "react"
 import Item from "./Item"
 
 type Cordinates = {

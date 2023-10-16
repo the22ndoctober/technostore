@@ -220,6 +220,9 @@ const MainBar = () => {
                 >
                     Очистити виділені
                 </Button>
+                <Button variant="text" color="primary">
+                    Друк
+                </Button>
             </Grid>
         </>
     )

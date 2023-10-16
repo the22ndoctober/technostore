@@ -13,7 +13,7 @@ const Content = () => {
         <Box
             sx={{
                 p: 3,
-                width: 700,
+                width: 720,
                 display: "flex",
                 justifyContent: "center",
                 flexDirection: "column",
@@ -26,7 +26,7 @@ const Content = () => {
                 direction={"row"}
                 columnGap={2}
                 p={1}
-                sx={{ width: 550 }}
+                sx={{ width: 650 }}
             >
                 <Typography variant="body1" color="initial">
                     №
@@ -34,9 +34,22 @@ const Content = () => {
                 <Typography variant="body1" color="initial">
                     Назва
                 </Typography>
-                <Typography variant="body1" sx={{ ml: "auto" }} color="initial">
-                    Ячейка
-                </Typography>
+                <Grid item spacing={0} sx={{ ml: "auto" }}>
+                    <Grid container spacing={0} columnGap={2}>
+                        <Typography variant="body1" color="initial">
+                            НЗЦО
+                        </Typography>
+                        <Typography variant="body1" color="initial">
+                            НЗ
+                        </Typography>
+                        <Typography variant="body1" color="initial">
+                            Продажі
+                        </Typography>
+                        <Typography variant="body1" color="initial">
+                            Ячейка
+                        </Typography>
+                    </Grid>
+                </Grid>
             </Grid>
             <Box
                 sx={{
@@ -56,6 +69,9 @@ const Content = () => {
                             name={item.name}
                             isChecked={item.isChecked}
                             cell={item.cell}
+                            sales={item.sales}
+                            nz={item.nz}
+                            nzco={item.nzco}
                             handleChecked={() => {
                                 dispatch(
                                     selectItem({ type: "SELECT", payload: id })
